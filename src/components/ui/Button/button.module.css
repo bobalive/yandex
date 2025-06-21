@@ -1,0 +1,26 @@
+.button {
+  padding: 20px 27px;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 35px;
+  border: none;
+  color: var(--text-color);
+
+  cursor: pointer;
+}
+
+.default {
+  background-color: #2ae881;
+}
+.disabled {
+  color: #787878;
+  background-color: #c0c0c0;
+  cursor: auto;
+}
+.yellow {
+  background-color: #fce300;
+}
+.black {
+  background-color: #201b10;
+  color: white;
+}

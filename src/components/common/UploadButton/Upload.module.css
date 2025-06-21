@@ -1,0 +1,70 @@
+.upload_button_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.upload_button_container_content {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.upload_button {
+  font-size: 35px;
+  line-height: 110%;
+  color: var(--text-color);
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  width: 360px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+.text {
+  font-size: 35px;
+  color: var(--text-color);
+}
+.text.error {
+  color: #ff5f00;
+}
+.upload {
+  font-size: 35px;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  padding: 15px 0;
+  width: 360px;
+  display: flex;
+  justify-content: center;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  color: var(--text-color);
+}
+.upload.success {
+  background-color: #d4fae6;
+}
+.upload.error {
+  background-color: #ff5f00;
+  color: white;
+}
+.cancel {
+  width: 32px;
+  height: 32px;
+}
+.cancel_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 70px;
+  height: 70px;
+  background-color: var(--black);
+  border-radius: 10px;
+}
