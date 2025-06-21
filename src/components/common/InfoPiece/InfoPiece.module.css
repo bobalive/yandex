@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  padding: 21px;
+  background-color: white;
+  border-radius: 24px;
+}
+.title {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 100%;
+  color: var(--text-color);
+  text-transform: capitalize;
+}

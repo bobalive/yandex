@@ -17,6 +17,20 @@
   border-radius: 40px;
 }
 
+.content.disabled {
+  background-color: transparent;
+  border: 1px black solid;
+}
+.content.error {
+  border: 1px #ff5f00 solid;
+}
+.content.success {
+  border: 1px green solid;
+}
+.content.loading {
+  border: 1px blue solid;
+}
+
 .dragActive {
   background-color: #d4fae6;
 }

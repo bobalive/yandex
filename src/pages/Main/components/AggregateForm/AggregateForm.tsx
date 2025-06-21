@@ -1,19 +1,27 @@
 import React, { useMemo, useRef, useState } from "react";
-import styles from "./FileUploader.module.css";
+import styles from "./AggregateForm.module.css";
 import UploadButton from "@/components/common/UploadButton/UploadButton";
-import { Button } from "../Button";
+import { Button } from "@/components/ui/Button/Button";
+import { aggregateFile } from "@/shared/api/aggreagate";
+import type { AggregatedData } from "@/shared/types/aggregateType";
 
-interface FileUploaderProps {
-  onSubmit: (file: File) => Promise<void>;
+export type AggregateFormProps = {
+  onSubmit: (
+    status: "success" | "error",
+    fileName: string,
+    data?: AggregatedData
+  ) => void;
   selectedFile?: string;
   acceptedFileTypes?: string;
   multiple?: boolean;
-}
+  onClear: () => void;
+};
 
-export const FileUploader: React.FC<FileUploaderProps> = ({
+export const AggregateForm: React.FC<AggregateFormProps> = ({
   onSubmit,
   acceptedFileTypes,
   multiple = false,
+  onClear,
 }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileState, setState] = useState<
@@ -52,6 +60,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
   const handleDragOut = (
     e: React.DragEvent<HTMLFormElement | HTMLDivElement>
   ) => {
+    if (fileState != "default") return;
     e.preventDefault();
     e.stopPropagation();
     dragCounter.current--;
@@ -61,6 +70,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
   };
 
   const handleDrop = (e: React.DragEvent<HTMLFormElement | HTMLDivElement>) => {
+    if (fileState != "default") return;
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
@@ -68,6 +78,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const files = Array.from(e.dataTransfer.files);
       setSelectedFile(files[0]);
+      console.log(files[0].name);
       setState("uploaded");
       e.dataTransfer.clearData();
     }
@@ -93,10 +104,12 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
     }
     setState("loading");
     try {
-      await onSubmit(selectedFile);
+      const res = await aggregateFile(selectedFile);
+      onSubmit("success", selectedFile.name, res);
       setState("success");
     } catch (e) {
       console.error(e);
+      onSubmit("error", selectedFile.name);
       setState("error");
     }
   };
@@ -104,7 +117,9 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
   return (
     <div className={styles.container}>
       <form
-        className={`${styles.content} ${dragActive ? styles.dragActive : ""}`}
+        className={`${styles.content} ${dragActive ? styles.dragActive : ""} ${
+          fileState != "default" ? styles.disabled : ""
+        } ${styles[fileState]}`}
         onDragEnter={handleDragIn}
         onDragLeave={handleDragOut}
         onDragOver={handleDrag}
@@ -127,6 +142,7 @@ export const FileUploader: React.FC<FileUploaderProps> = ({
             onCancel={() => {
               setSelectedFile(null);
               setState("default");
+              onClear();
             }}
           >
             {selectedFile ? selectedFile.name : "Загрузить файл"}

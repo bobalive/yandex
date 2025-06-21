@@ -1,11 +1,12 @@
 import styles from "./Upload.module.css";
 import cancel from "@/assets/icons/cancel.svg";
+import loading from "@/assets/icons/loading.svg";
 
 type UploadButton = {
   text?: string;
   children: React.ReactNode;
   state: "default" | "loading" | "error" | "success" | "uploaded";
-  onClick: () => void;
+  onClick?: () => void;
   onCancel: () => void;
 };
 const UploadButton = ({
@@ -26,7 +27,19 @@ const UploadButton = ({
             {children}
           </button>
         ) : (
-          <div className={`${styles.upload} ${styles[state]}`}>{children}</div>
+          <div className={`${styles.upload} ${styles[state]}`}>
+            {state == "loading" ? (
+              <div className={styles.loading}>
+                <img
+                  src={loading}
+                  alt="loading"
+                  className={styles.loading_icon}
+                />
+              </div>
+            ) : (
+              children
+            )}
+          </div>
         )}
         {state != "default" && state != "loading" && (
           <div onClick={onCancel} className={styles.cancel_container}>
