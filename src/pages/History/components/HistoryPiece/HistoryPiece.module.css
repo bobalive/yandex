@@ -1,0 +1,43 @@
+.historyPiece__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.historyPiece {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--primary-color);
+  padding: 16px 20px;
+  border-radius: 40px;
+  gap: 10px;
+  width: 100%;
+}
+.historyPiece.selectable {
+  cursor: pointer;
+}
+.historyPiece__info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.historyPiece__icon {
+  width: 40px;
+  height: 40px;
+}
+.historyPiece__info {
+  font-size: 30px;
+}
+.historyPiece__info.disabled {
+  opacity: 0.5;
+}
+.historyPiece__delete {
+  cursor: pointer;
+  width: 87px;
+  height: 87px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}

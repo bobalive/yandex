@@ -15,3 +15,6 @@
   color: var(--text-color);
   text-transform: capitalize;
 }
+.container.purple {
+  background-color: var(--purple-light);
+}

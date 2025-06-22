@@ -4,7 +4,7 @@ import { sendRequest } from "./sendRequest";
 export const aggregateFile = async (file: File) => {
   const formData = new FormData();
   const searchParams = new URLSearchParams();
-  searchParams.append("rows", "10000");
+  searchParams.append("rows", "100000");
   formData.append("file", file);
   const res = await sendRequest(
     API.aggregate + "?" + searchParams.toString(),

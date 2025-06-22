@@ -1,6 +1,6 @@
 import styles from "./Upload.module.css";
-import cancel from "@/assets/icons/cancel.svg";
 import loading from "@/assets/icons/loading.svg";
+import { CloseIcon } from "../CloseIcon";
 
 type UploadButton = {
   text?: string;
@@ -42,9 +42,7 @@ const UploadButton = ({
           </div>
         )}
         {state != "default" && state != "loading" && (
-          <div onClick={onCancel} className={styles.cancel_container}>
-            <img src={cancel} alt="cancel" className={styles.cancel} />
-          </div>
+          <CloseIcon onClick={onCancel} />
         )}
       </div>
       {text && <p className={`${styles[state]} ${styles.text}`}>{text}</p>}
