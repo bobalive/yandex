@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/Button";
 import styles from "./Generate.module.css";
-import { Link } from "react-router-dom";
-import { generateReport } from "@/shared/api/report";
 import { useMemo, useState } from "react";
 import UploadButton from "@/components/common/UploadButton/UploadButton";
+import { generateReport } from "@/shared/api/report";
 export const Generate = () => {
   const [status, setStatus] = useState<
     "default" | "loading" | "success" | "error"
@@ -13,7 +12,8 @@ export const Generate = () => {
     try {
       await generateReport();
       setStatus("success");
-    } catch (error) {
+    } catch (e) {
+      console.error(e);
       setStatus("error");
     }
   };
